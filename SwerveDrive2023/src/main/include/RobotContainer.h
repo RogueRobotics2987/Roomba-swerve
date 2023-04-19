@@ -3,31 +3,20 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #pragma once
-
-#include <frc2/command/CommandPtr.h>
-#include <frc2/command/button/CommandXboxController.h>
-#include <frc2/command/InstantCommand.h>
-#include <frc2/command/SequentialCommandGroup.h>
-#include <frc2/command/SwerveControllerCommand.h>
-#include <frc2/command/button/JoystickButton.h>
-
 #include "Constants.h"
 #include "subsystems/DriveSubsystem.h"
 #include "subsystems/SwerveModuleSubsystem.h"
-#include <iostream>
-#include <utility>
-#include <units/angle.h>
-#include <units/velocity.h>
-#include <frc/XboxController.h>
 #include <frc/Joystick.h>
-#include <frc/smartdashboard/SmartDashboard.h>
-#include <frc/controller/PIDController.h>
+#include <frc/XboxController.h>
 #include <frc/geometry/Translation2d.h>
-#include <frc/shuffleboard/Shuffleboard.h>
+#include <frc2/command/button/JoystickButton.h>
+#include <frc2/command/Command.h>
+#include <frc2/command/CommandHelper.h>
+#include <frc2/command/CommandPtr.h>
+#include <frc2/command/InstantCommand.h>
 #include <frc2/command/RunCommand.h>
-//#include <frc/trajectory/Trajectory.h>
-//#include <frc/trajectory/TrajectoryGenerator.h>
-
+#include <frc2/command/SequentialCommandGroup.h>
+#include <iostream>
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -39,15 +28,13 @@
 class RobotContainer {
  public:
   RobotContainer();
-  //~RobotContainer();
-  frc2::CommandPtr GetAutonomousCommand();
+  frc2::Command* GetAutonomousCommand();
+
   float Deadzone(float x);
 
  private:
-  // Replace with CommandPS4Controller or CommandJoystick if needed
-  frc2::CommandXboxController m_driverController{
-      OperatorConstants::kDriverControllerPort};
-
+  //replace with frc::Joystick if using a joystick instead of an xbox controller
+  frc::XboxController m_driverController{0};
 
   // The robot's subsystems are defined here...
   DriveSubsystem m_drive;

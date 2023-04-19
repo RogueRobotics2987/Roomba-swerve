@@ -1,22 +1,17 @@
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
+
+#pragma once
+#include "rev/SparkMaxRelativeEncoder.h"
 #include <frc/geometry/Translation2d.h>
 #include <frc/kinematics/SwerveDriveKinematics.h>
 #include <frc/trajectory/TrapezoidProfile.h>
+#include <numbers>
 #include <units/acceleration.h>
 #include <units/angular_acceleration.h>
-#include <units/angle.h>
 #include <units/angular_velocity.h>
-#include <units/length.h>
-#include <units/time.h>
-#include <units/velocity.h>
 #include <units/voltage.h>
-#include <numbers>
-// #include "rev/CANEncoder.h"
-#include "rev/SparkMaxRelativeEncoder.h"
-
-#pragma once
 
 /**
  * The Constants header provides a convenient place for teams to hold robot-wide
@@ -29,37 +24,25 @@
  */
 
 namespace DriveConstants {
-constexpr int kFrontLeftDriveMotorPort = 13; //13 for tshirt cannon
-constexpr int kRearLeftDriveMotorPort = 7; //7 for tshirt
-constexpr int kFrontRightDriveMotorPort = 3; //3 for tshirt
-constexpr int kRearRightDriveMotorPort = 5; // 5 for tshirt
+constexpr int kFrontLeftDriveMotorPort = 13; 
+constexpr int kRearLeftDriveMotorPort = 7; 
+constexpr int kFrontRightDriveMotorPort = 3; 
+constexpr int kRearRightDriveMotorPort = 5; 
 
-constexpr int kFrontLeftTurningMotorPort = 2; //2 for tshirt
-constexpr int kRearLeftTurningMotorPort = 8; // 8 for tshirt
-constexpr int kFrontRightTurningMotorPort = 4;//4 for tshirt
-constexpr int kRearRightTurningMotorPort = 6; //6 for tshirt
+constexpr int kFrontLeftTurningMotorPort = 2; 
+constexpr int kRearLeftTurningMotorPort = 8; 
+constexpr int kFrontRightTurningMotorPort = 4;
+constexpr int kRearRightTurningMotorPort = 6; 
 
-constexpr int kFrontLeftTurningEncoderNumber = 9; //9 for tshirt
-constexpr int kRearLeftTurningEncoderNumber = 12; //12 for tshirt
-constexpr int kFrontRightTurningEncoderNumber = 10;//10 for tshirt
-constexpr int kRearRightTurningEncoderNumber = 11;//11 for tshirt
-
-// constexpr int Actuator = 40;
-
-// constexpr int kFrontLeftTurningEncoderPorts[2]{0, 1};
-// constexpr int kRearLeftTurningEncoderPorts[2]{2, 3};
-// constexpr int kFrontRightTurningEncoderPorts[2]{4, 5};
-// constexpr int kRearRightTurningEncoderPorts[2]{5, 6};
+constexpr int kFrontLeftTurningEncoderNumber = 9; 
+constexpr int kRearLeftTurningEncoderNumber = 12; 
+constexpr int kFrontRightTurningEncoderNumber = 10;
+constexpr int kRearRightTurningEncoderNumber = 11;
 
 constexpr bool kFrontLeftTurningEncoderReversed = false;
 constexpr bool kRearLeftTurningEncoderReversed = false;
 constexpr bool kFrontRightTurningEncoderReversed = false;
 constexpr bool kRearRightTurningEncoderReversed = false;
-
-// constexpr int kFrontLeftDriveEncoderPorts[2]{0, 1};
-// constexpr int kRearLeftDriveEncoderPorts[2]{2, 3};
-// constexpr int kFrontRightDriveEncoderPorts[2]{4, 5};
-// constexpr int kRearRightDriveEncoderPorts[2]{5, 6};
 
 constexpr bool kFrontLeftDriveEncoderReversed = false;
 constexpr bool kRearLeftDriveEncoderReversed = true;
@@ -76,7 +59,6 @@ constexpr int kRearLeftTurningCPR = 1;
 constexpr int kFrontRightTurningCPR = 1;
 constexpr int kRearRightTurningCPR = 1;
 
-// constexpr rev::CANEncoder::EncoderType m_EncoderType = rev::CANEncoder::EncoderType::kHallSensor;
 constexpr rev::SparkMaxRelativeEncoder::Type m_EncoderType = rev::SparkMaxRelativeEncoder::Type::kHallSensor;
 
 // These are example values only - DO NOT USE THESE FOR YOUR OWN ROBOT!
@@ -93,24 +75,7 @@ constexpr double kPFrontLeftVel = 0.5;
 constexpr double kPRearLeftVel = 0.5;
 constexpr double kPFrontRightVel = 0.5;
 constexpr double kPRearRightVel = 0.5;
-}  // namespace DriveConstants
-
-
-// namespace ModuleConstants {
-// constexpr int kEncoderCPR = 1024;
-// constexpr double kWheelDiameterMeters = 0.15;
-// constexpr double kDriveEncoderDistancePerPulse =
-//     // Assumes the encoders are directly mounted on the wheel shafts
-//     (kWheelDiameterMeters * std::numbers::pi) /
-//     static_cast<double>(kEncoderCPR);
-
-// constexpr double kTurningEncoderDistancePerPulse =
-//     // Assumes the encoders are directly mounted on the wheel shafts
-//     (std::numbers::pi * 2) / static_cast<double>(kEncoderCPR);
-
-// constexpr double kPModuleTurningController = 1;
-// constexpr double kPModuleDriveController = 1;
-// }  // namespace ModuleConstants
+}  
 
 namespace ModuleConstants {
 constexpr double wheelOffset = 0;
@@ -133,9 +98,6 @@ constexpr double kFFModuleDriveController = 0.259375;
 }
 
 namespace AutoConstants {
-// using radians_per_second_squared_t =
-//     units::compound_unit<units::radians,
-//                          units::inverse<units::squared<units::second>>>;
 
 constexpr auto kMaxSpeed = 4.2_mps;
 constexpr auto kMaxAcceleration = 0.5_mps_sq;
@@ -146,15 +108,10 @@ constexpr double kPXController = 0.1;
 constexpr double kPYController = 0;
 constexpr double kPThetaController = 0;
 
-//
-
 extern const frc::TrapezoidProfile<units::radians>::Constraints
     kThetaControllerConstraints;
+}  
 
-}  // namespace AutoConstants
-
-namespace OperatorConstants {
-
-constexpr int kDriverControllerPort = 0;
-
-}  // namespace OperatorConstants
+namespace DebugConstants {
+    constexpr bool debug = false; //change this to true to debug and put most things to the smartdashboard
+}  

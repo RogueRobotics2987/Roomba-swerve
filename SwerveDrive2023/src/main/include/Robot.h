@@ -3,13 +3,10 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #pragma once
-
-#include <optional>
-
-#include <frc/TimedRobot.h>
-#include <frc2/command/CommandPtr.h>
-
 #include "RobotContainer.h"
+#include <frc/TimedRobot.h>
+#include <frc2/command/Command.h>
+#include <frc2/command/CommandScheduler.h>
 
 class Robot : public frc::TimedRobot {
  public:
@@ -22,13 +19,11 @@ class Robot : public frc::TimedRobot {
   void TeleopInit() override;
   void TeleopPeriodic() override;
   void TestPeriodic() override;
-  void SimulationInit() override;
-  void SimulationPeriodic() override;
 
  private:
-  // Have it empty by default so that if testing teleop it
+  // Have it null by default so that if testing teleop it
   // doesn't have undefined behavior and potentially crash.
-  std::optional<frc2::CommandPtr> m_autonomousCommand;
+  frc2::Command* m_autonomousCommand = nullptr;
 
   RobotContainer m_container;
 };

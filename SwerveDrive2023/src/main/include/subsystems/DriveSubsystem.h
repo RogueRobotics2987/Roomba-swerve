@@ -3,37 +3,17 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #pragma once
-
-#include <frc2/command/SubsystemBase.h>
-
-#include <AHRS.h>
-#include <frc2/command/CommandPtr.h>
-#include <frc/motorcontrol/PWMVictorSPX.h>
-#include <frc/ADXRS450_Gyro.h>
-#include <frc/Encoder.h>
-#include <frc/drive/MecanumDrive.h>
-#include <frc/geometry/Pose2d.h>
-#include <frc/geometry/Rotation2d.h>
-#include <frc/interfaces/Gyro.h>
-#include <frc/kinematics/ChassisSpeeds.h>
-#include <frc/kinematics/SwerveDriveKinematics.h>
-#include <frc/kinematics/SwerveDriveOdometry.h>
-#include <frc/motorcontrol/PWMSparkMax.h>
-#include <frc2/command/SubsystemBase.h>
-#include <frc2/command/Commands.h>
-#include <frc2/command/CommandPtr.h>
-#include <frc2/command/FunctionalCommand.h>
-#include <frc/smartdashboard/Field2d.h>
-#include <frc/smartdashboard/SmartDashboard.h>
-
 #include "Constants.h"
 #include "SwerveModuleSubsystem.h"
-
+#include <AHRS.h>
+#include <frc/kinematics/SwerveDriveOdometry.h>
+#include <frc/smartdashboard/Field2d.h>
+#include <frc/smartdashboard/SmartDashboard.h>
+#include <frc2/command/CommandPtr.h>
 
 class DriveSubsystem : public frc2::SubsystemBase {
  public:
   DriveSubsystem();
-  //~DriveSubsystem();
   
   /**
    * Will be called periodically whenever the CommandScheduler runs.
@@ -54,10 +34,10 @@ class DriveSubsystem : public frc2::SubsystemBase {
    */
   void Drive(units::meters_per_second_t xSpeed,
              units::meters_per_second_t ySpeed, units::radians_per_second_t rot,
-             bool fieldRelative, bool noJoystick);
+             bool fieldRelative, bool noJoystickInput);
   void DriveAutonomous(units::meters_per_second_t xSpeed,
              units::meters_per_second_t ySpeed, units::radians_per_second_t rot,
-             bool fieldRelative, bool noJoystick);
+             bool fieldRelative, bool noJoystickInput);
 
   /**
    * Resets the drive encoders to currently read a position of 0.
@@ -76,10 +56,6 @@ class DriveSubsystem : public frc2::SubsystemBase {
    */
   units::degree_t GetHeading() const;
 
-  /**
-   * Zeroes the heading of the robot.
-   */
-
   float GetPitch();
 
   float GetRoll();
@@ -88,7 +64,7 @@ class DriveSubsystem : public frc2::SubsystemBase {
 
   frc2::CommandPtr ZeroHeading();
   frc2::CommandPtr FieldOrientatedTrue(); //field orientated driving
-  frc2::CommandPtr FieldOrientatedFalse(); //field centric driving
+  frc2::CommandPtr FieldOrientatedFalse(); //robot centric driving
   frc2::CommandPtr SetAngleAdjustment(double angle);
 
   /**
@@ -114,9 +90,6 @@ class DriveSubsystem : public frc2::SubsystemBase {
 
   frc2::CommandPtr SetDriveSlow(bool m_bool);
   
-
-  frc2::CommandPtr ButtonZeroHeading();
-
   void ConfigMotorControllers();
 
   // what this does with limelight
@@ -125,10 +98,8 @@ class DriveSubsystem : public frc2::SubsystemBase {
   frc2::CommandPtr Twitch(bool direction);
 
 
-  units::meter_t kTrackWidth =
-      0.4699_m;  // Distance between centers of right and left wheels on robot
-  units::meter_t kWheelBase =
-      0.4699_m;  // Distance between centers of front and back wheels on robot
+  units::meter_t kTrackWidth = 0.4699_m;  // Distance between centers of right and left wheels on robot
+  units::meter_t kWheelBase = 0.4699_m;  // Distance between centers of front and back wheels on robot
 
   frc::SwerveDriveKinematics<4> kDriveKinematics{
       frc::Translation2d{kWheelBase / 2, kTrackWidth / 2},
@@ -139,14 +110,12 @@ class DriveSubsystem : public frc2::SubsystemBase {
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
-//   bool WheelsStraight = false;
   SwerveModuleSubsystem m_frontLeft;
   SwerveModuleSubsystem m_frontRight;
   SwerveModuleSubsystem m_rearLeft;
   SwerveModuleSubsystem m_rearRight;
 
   // The gyro sensor
-  //frc::ADXRS450_Gyro m_gyro;
   AHRS m_gyro{frc::SerialPort::kMXP};
 
   // Odometry class for tracking robot pose
@@ -157,9 +126,6 @@ class DriveSubsystem : public frc2::SubsystemBase {
 
   frc::Field2d m_field;
 
-  // for limelight, configOdometry
   int numAT = 0;
   bool fieldOrientated = false;
-  //int cur_pipeline = 7;
-
 };

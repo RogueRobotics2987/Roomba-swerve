@@ -3,31 +3,16 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #pragma once
-
-#include <frc2/command/SubsystemBase.h>
-#include <frc/Encoder.h>
-#include <frc/motorcontrol/Spark.h>
-#include <frc/controller/PIDController.h>
-#include <frc/controller/ProfiledPIDController.h>
-#include <frc/geometry/Rotation2d.h>
-#include <frc/kinematics/SwerveModuleState.h>
-#include <frc/kinematics/SwerveModulePosition.h>
-#include <frc/trajectory/TrapezoidProfile.h>
-#include <numbers>
-#include "rev/CANSparkMax.h"
-#include "rev/CANEncoder.h"
-#include <frc/smartdashboard/SmartDashboard.h>
+#include "Constants.h"
 #include "ctre/Phoenix.h"
-#include "Constants.h"
-#include <frc/geometry/Rotation2d.h>
-#include <numbers>
-#include "Constants.h"
-#include <string>
-
+#include "rev/CANSparkMax.h"
+#include <frc/controller/ProfiledPIDController.h>
+#include <frc/smartdashboard/SmartDashboard.h>
+#include <frc2/command/SubsystemBase.h>
 
 class SwerveModuleSubsystem : public frc2::SubsystemBase {
  public:
-  SwerveModuleSubsystem();
+SwerveModuleSubsystem();
 
 SwerveModuleSubsystem(int m_MotorController, rev::SparkMaxRelativeEncoder::Type m_EncoderType, int m_counts_per_rev, 
       int m_MotorControllerTurning, 
