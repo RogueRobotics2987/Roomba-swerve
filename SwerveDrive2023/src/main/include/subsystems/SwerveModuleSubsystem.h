@@ -33,9 +33,6 @@ SwerveModuleSubsystem(int m_MotorController, rev::SparkMaxRelativeEncoder::Type 
   void ResetEncoders();
 
 
-  void Periodic();
-
-
   void ConfigMotorControllers();
 
 

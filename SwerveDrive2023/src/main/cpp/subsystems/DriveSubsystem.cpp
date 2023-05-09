@@ -84,7 +84,7 @@ void DriveSubsystem::Drive(units::meters_per_second_t xSpeed,
   }
 
 
-  if (noJoystickInput == true){//if there is no joystick input, the wheels will go to the 45 degree (X) position
+  if (noJoystickInput == true){
     fl.speed = (units::velocity::meters_per_second_t)(0);
     fr.speed = (units::velocity::meters_per_second_t)(0);
     bl.speed = (units::velocity::meters_per_second_t)(0);
@@ -141,7 +141,7 @@ frc2::CommandPtr DriveSubsystem::ZeroHeading() {
     });
 }
 
-
+//small left right movement. Optional to have
 frc2::CommandPtr DriveSubsystem::Twitch(bool direction){
   return this -> Run(
     [this, direction]{

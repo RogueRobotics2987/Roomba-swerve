@@ -87,9 +87,9 @@ constexpr double kPRearRightVel = 0.5;
 
 namespace ModuleConstants {
 constexpr double wheelOffset = 0;
-constexpr double gearRatio = 8.14; //we measured 8.91
+constexpr double gearRatio = 8.14;
 constexpr double kEncoderCPR = 1;
-constexpr double kWheelDiameterMeters = 0.0977; // 0.0762
+constexpr double kWheelDiameterMeters = 0.0977;
 constexpr double kDriveEncoderDistancePerPulse =
     // Assumes the encoders are directly mounted on the wheel shafts
     (kWheelDiameterMeters * std::numbers::pi) / (kEncoderCPR) / gearRatio;
@@ -100,9 +100,8 @@ constexpr double kTurningEncoderDistancePerPulse =
     (std::numbers::pi * 2) / (kEncoderCPR);
 
 
-constexpr double kPModuleTurningController = 0.6;//1.0; // 0.5 //0.003 // TODO: reduce this by a factor of half outside comp
-constexpr double kPModuleDriveController = 0.1; // 0.1
-// TODO Lower Value of P to 0.0001,  Change Value of p Till its the Highest Without Osilation,
+constexpr double kPModuleTurningController = 0.6;
+constexpr double kPModuleDriveController = 0.1;
 constexpr double kFFModuleDriveController = 0.259375;
 
 
