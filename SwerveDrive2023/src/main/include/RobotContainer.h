@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 #pragma once
 #include "Constants.h"
 #include "subsystems/DriveSubsystem.h"
@@ -18,6 +14,7 @@
 #include <frc2/command/SequentialCommandGroup.h>
 #include <iostream>
 
+
 /**
  * This class is where the bulk of the robot should be declared.  Since
  * Command-based is a "declarative" paradigm, very little robot logic should
@@ -30,14 +27,18 @@ class RobotContainer {
   RobotContainer();
   frc2::Command* GetAutonomousCommand();
 
+
   float Deadzone(float x);
+
 
  private:
   //replace with frc::Joystick if using a joystick instead of an xbox controller
   frc::XboxController m_driverController{0};
 
+
   // The robot's subsystems are defined here...
   DriveSubsystem m_drive;
+
 
   void ConfigureButtonBindings();
 };

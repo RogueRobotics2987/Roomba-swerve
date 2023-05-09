@@ -1,41 +1,41 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 #include "subsystems/DriveSubsystem.h"
+
 
 using namespace DriveConstants;
 
+
 DriveSubsystem::DriveSubsystem()
-  : 
+  :
     m_frontLeft{
-        kFrontLeftDriveMotorPort, m_EncoderType, kFrontLeftDriveCPR, 
-        kFrontLeftTurningMotorPort, 
-        kFrontLeftDriveEncoderReversed, 
+        kFrontLeftDriveMotorPort, m_EncoderType, kFrontLeftDriveCPR,
+        kFrontLeftTurningMotorPort,
+        kFrontLeftDriveEncoderReversed,
         kFrontLeftTurningEncoderNumber,
         kFrontLeftTurningEncoderReversed
       },
       m_frontRight{
-        kFrontRightDriveMotorPort, m_EncoderType, kFrontRightDriveCPR, 
+        kFrontRightDriveMotorPort, m_EncoderType, kFrontRightDriveCPR,
         kFrontRightTurningMotorPort,
-        kFrontRightDriveEncoderReversed, 
+        kFrontRightDriveEncoderReversed,
         kFrontRightTurningEncoderNumber,
         kFrontRightTurningEncoderReversed
       },
       m_rearLeft{
-        kRearLeftDriveMotorPort, m_EncoderType, kRearLeftDriveCPR, 
-        kRearLeftTurningMotorPort, 
-        kRearLeftDriveEncoderReversed, 
+        kRearLeftDriveMotorPort, m_EncoderType, kRearLeftDriveCPR,
+        kRearLeftTurningMotorPort,
+        kRearLeftDriveEncoderReversed,
         kRearLeftTurningEncoderNumber,
         kRearLeftTurningEncoderReversed
       },
       m_rearRight{
-        kRearRightDriveMotorPort, m_EncoderType, kRearRightDriveCPR, 
-        kRearRightTurningMotorPort, 
-        kRearRightDriveEncoderReversed, 
+        kRearRightDriveMotorPort, m_EncoderType, kRearRightDriveCPR,
+        kRearRightTurningMotorPort,
+        kRearRightDriveEncoderReversed,
         kRearRightTurningEncoderNumber,
         kRearRightTurningEncoderReversed
       },
+
+
 
 
       m_odometry{kDriveKinematics,
@@ -46,6 +46,7 @@ DriveSubsystem::DriveSubsystem()
                  frc::Pose2d{}} {}
                  
 
+
 void DriveSubsystem::Periodic() {
   // Implementation of subsystem periodic method goes here.
   m_odometry.Update(frc::Rotation2d(m_gyro.GetRotation2d()),
@@ -53,11 +54,12 @@ void DriveSubsystem::Periodic() {
                      m_frontRight.GetPosition(), m_rearRight.GetPosition()});
 }
 
+
 void DriveSubsystem::Drive(units::meters_per_second_t xSpeed,
                            units::meters_per_second_t ySpeed,
                            units::radians_per_second_t rot,
                            bool fieldRelative, bool noJoystickInput) {
-                      
+                     
   if (DebugConstants::debug == true){
     frc::SmartDashboard::PutNumber("ROT value: ", rot.value());
   }
@@ -67,16 +69,20 @@ void DriveSubsystem::Drive(units::meters_per_second_t xSpeed,
                     : frc::ChassisSpeeds{xSpeed, ySpeed, rot});
 
 
+
+
   kDriveKinematics.DesaturateWheelSpeeds(&states, AutoConstants::kMaxSpeed);
 
+
   auto [fl, fr, bl, br] = states;
-    
+   
   if (DebugConstants::debug == true){
     frc::SmartDashboard::PutNumber("Fl Desired angle",(float)fl.angle.Degrees());
     frc::SmartDashboard::PutNumber("Fr Desired angle",(float)fr.angle.Degrees());
     frc::SmartDashboard::PutNumber("Bl Desired angle",(float)bl.angle.Degrees());
     frc::SmartDashboard::PutNumber("Br Desired angle",(float)br.angle.Degrees());
   }
+
 
   if (noJoystickInput == true){//if there is no joystick input, the wheels will go to the 45 degree (X) position
     fl.speed = (units::velocity::meters_per_second_t)(0);
@@ -86,13 +92,14 @@ void DriveSubsystem::Drive(units::meters_per_second_t xSpeed,
     fl.angle = (units::angle::degree_t)(45);
     fr.angle = (units::angle::degree_t)(135);
     bl.angle = (units::angle::degree_t)(-45);
-    br.angle = (units::angle::degree_t)(-135); 
+    br.angle = (units::angle::degree_t)(-135);
   } else {
     fl.speed = (units::velocity::meters_per_second_t)(0);
     fr.speed = (units::velocity::meters_per_second_t)(0);
     bl.speed = (units::velocity::meters_per_second_t)(0);
     br.speed = (units::velocity::meters_per_second_t)(0);
   }
+
 
   if (driveSlow == true){
     fl.speed = (units::velocity::meters_per_second_t)(0.5 * fl.speed);
@@ -112,6 +119,7 @@ void DriveSubsystem::Drive(units::meters_per_second_t xSpeed,
   m_rearRight.SetDesiredState(br);
 }
 
+
 void DriveSubsystem::SetModuleStates(wpi::array<frc::SwerveModuleState, 4> desiredStates) {
   kDriveKinematics.DesaturateWheelSpeeds(&desiredStates, AutoConstants::kMaxSpeed);
   m_frontLeft.SetDesiredState(desiredStates[0]);
@@ -120,9 +128,11 @@ void DriveSubsystem::SetModuleStates(wpi::array<frc::SwerveModuleState, 4> desir
   m_rearRight.SetDesiredState(desiredStates[3]);
 }
 
+
 units::degree_t DriveSubsystem::GetHeading() const {
   return m_gyro.GetRotation2d().Degrees();
 }
+
 
 frc2::CommandPtr DriveSubsystem::ZeroHeading() {
   return this->RunOnce(
@@ -130,6 +140,7 @@ frc2::CommandPtr DriveSubsystem::ZeroHeading() {
       m_gyro.Reset();
     });
 }
+
 
 frc2::CommandPtr DriveSubsystem::Twitch(bool direction){
   return this -> Run(
@@ -146,13 +157,16 @@ frc2::CommandPtr DriveSubsystem::Twitch(bool direction){
   }});
 }
 
+
 double DriveSubsystem::GetTurnRate() {
   return -m_gyro.GetRate();
 }
 
+
 frc::Pose2d DriveSubsystem::GetPose() {
   return m_odometry.GetPose();
 }
+
 
 void DriveSubsystem::ResetOdometry(frc::Pose2d pose) {
   m_odometry.ResetPosition(
