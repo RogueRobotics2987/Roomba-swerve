@@ -22,19 +22,19 @@
 
 
 namespace DriveConstants {
-constexpr int kFrontLeftDriveMotorPort = 13;
-constexpr int kRearLeftDriveMotorPort = 7;
-constexpr int kFrontRightDriveMotorPort = 3;
-constexpr int kRearRightDriveMotorPort = 5;
+constexpr int kFrontLeftDriveMotorPort = 42;
+constexpr int kRearLeftDriveMotorPort = 18;
+constexpr int kFrontRightDriveMotorPort = 56;
+constexpr int kRearRightDriveMotorPort = 46;
 
 
-constexpr int kFrontLeftTurningMotorPort = 2;
-constexpr int kRearLeftTurningMotorPort = 8;
-constexpr int kFrontRightTurningMotorPort = 4;
-constexpr int kRearRightTurningMotorPort = 6;
+constexpr int kFrontLeftTurningMotorPort = 48;
+constexpr int kRearLeftTurningMotorPort = 43;
+constexpr int kFrontRightTurningMotorPort = 9;
+constexpr int kRearRightTurningMotorPort = 47;
 
 
-constexpr int kFrontLeftTurningEncoderNumber = 9;
+constexpr int kFrontLeftTurningEncoderNumber = 9; //still need to be updated 11/2
 constexpr int kRearLeftTurningEncoderNumber = 12;
 constexpr int kFrontRightTurningEncoderNumber = 10;
 constexpr int kRearRightTurningEncoderNumber = 11;
