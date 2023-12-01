@@ -35,7 +35,7 @@ constexpr int kRearRightTurningMotorPort = 47;
 
 
 constexpr int kFrontLeftTurningEncoderNumber = 13; 
-constexpr int kRearLeftTurningEncoderNumber = 16; //leave to update with rookie
+constexpr int kRearLeftTurningEncoderNumber = 16;
 constexpr int kFrontRightTurningEncoderNumber = 14;
 constexpr int kRearRightTurningEncoderNumber = 15;
 
