@@ -8,7 +8,7 @@ SwerveModuleSubsystem::SwerveModuleSubsystem(int m_MotorController, rev::SparkMa
   m_driveMotor = new rev::CANSparkMax(m_MotorController, rev::CANSparkMax::MotorType::kBrushless);
   m_driveMotor->SetOpenLoopRampRate(1);
   m_turningMotor = new rev::CANSparkMax(m_MotorControllerTurning, rev::CANSparkMax::MotorType::kBrushless);
-  m_turningMotor->SetInverted(false);
+  m_turningMotor->SetInverted(true);
   m_turningMotor->SetOpenLoopRampRate(0);
   m_driveEncoder = new rev::SparkMaxRelativeEncoder(m_driveMotor->GetEncoder(m_EncoderType, m_counts_per_rev));
   m_turningEncoder = new ctre::phoenix::sensors::CANCoder(TurningEncoderNumber);  
