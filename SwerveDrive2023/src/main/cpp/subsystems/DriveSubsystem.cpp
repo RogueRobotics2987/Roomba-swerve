@@ -93,12 +93,13 @@ void DriveSubsystem::Drive(units::meters_per_second_t xSpeed,
     fr.angle = (units::angle::degree_t)(135);
     bl.angle = (units::angle::degree_t)(-45);
     br.angle = (units::angle::degree_t)(-135);
-  } else {
-    fl.speed = (units::velocity::meters_per_second_t)(0);
-    fr.speed = (units::velocity::meters_per_second_t)(0);
-    bl.speed = (units::velocity::meters_per_second_t)(0);
-    br.speed = (units::velocity::meters_per_second_t)(0);
-  }
+  } 
+  // else {
+  //   fl.speed = (units::velocity::meters_per_second_t)(0);
+  //   fr.speed = (units::velocity::meters_per_second_t)(0);
+  //   bl.speed = (units::velocity::meters_per_second_t)(0);
+  //   br.speed = (units::velocity::meters_per_second_t)(0);
+  // }
 
 
   if (driveSlow == true){
