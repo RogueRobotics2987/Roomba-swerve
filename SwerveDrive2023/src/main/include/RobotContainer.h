@@ -13,6 +13,7 @@
 #include <frc2/command/RunCommand.h>
 #include <frc2/command/SequentialCommandGroup.h>
 #include <iostream>
+#include "subsystems/LimelightPose.h"
 
 
 /**
@@ -38,6 +39,7 @@ class RobotContainer {
 
   // The robot's subsystems are defined here...
   DriveSubsystem m_drive;
+  LimelightPose m_limePose;
 
 
   void ConfigureButtonBindings();

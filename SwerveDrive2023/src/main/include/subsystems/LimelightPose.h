@@ -6,6 +6,7 @@
 
 #include <frc2/command/SubsystemBase.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <iostream>
 
 class LimelightPose : public frc2::SubsystemBase {
  public:
@@ -16,7 +17,12 @@ class LimelightPose : public frc2::SubsystemBase {
    */
   void Periodic() override;
 
+  std::vector<double> botPose;
+
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
+
+
+
 };
