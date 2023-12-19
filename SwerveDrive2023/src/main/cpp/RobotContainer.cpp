@@ -45,7 +45,11 @@ m_drive.SetDefaultCommand(frc2::RunCommand(
                     fieldOrientated,
                     noJoystickInput);
       },{&m_drive}));
+
+m_limePose.SetDefaultCommand(LimeLightCmd(m_limePose));
+
 }
+
 
 
 void RobotContainer::ConfigureButtonBindings() {

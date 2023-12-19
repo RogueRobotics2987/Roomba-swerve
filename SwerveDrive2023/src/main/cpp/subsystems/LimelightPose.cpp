@@ -9,11 +9,11 @@ LimelightPose::LimelightPose() = default;
 // This method will be called once per scheduler run
 void LimelightPose::Periodic() {
 
-
+    //TODO make read actual values
     botPose = frc::SmartDashboard::GetNumberArray("botpose", std::span<const double>({0, 0, 0, 0, 0, 0}));
     
-    std::cout << botPose[0] << std::endl;
-    std::cout << botPose[1] << std::endl;
-    std::cout << botPose[2] << std::endl;
-    std::cout << "end" << std::endl;
+    frc::SmartDashboard::PutNumber("BOTPOSE1", botPose[0]);
+    frc::SmartDashboard::PutNumber("BOTPOSE2", botPose[1]);
+    frc::SmartDashboard::PutNumber("BOTPOSE3", botPose[2]);
+
 }

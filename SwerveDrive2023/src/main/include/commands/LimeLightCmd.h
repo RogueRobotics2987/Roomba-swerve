@@ -19,6 +19,7 @@ class LimeLightCmd
     : public frc2::CommandHelper<frc2::CommandBase, LimeLightCmd> {
  public:
   LimeLightCmd();
+  LimeLightCmd(LimelightPose &limePose);
 
   void Initialize() override;
 
@@ -28,7 +29,6 @@ class LimeLightCmd
 
   bool IsFinished() override;
 
-  LimeLightCmd::LimeLightCmd(LimelightPose &limePose);
 
   private:
   LimelightPose* m_limePose = nullptr;
