@@ -7,6 +7,8 @@
 #include <frc2/command/SubsystemBase.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <iostream>
+#include "networktables/NetworkTableInstance.inc"
+
 
 class LimelightPose : public frc2::SubsystemBase {
  public:
