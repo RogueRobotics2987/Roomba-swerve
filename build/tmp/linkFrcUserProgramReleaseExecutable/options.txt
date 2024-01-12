@@ -7,6 +7,7 @@ C:\\Users\\Rogue\\Documents\\Roomba\\Roomba-Swerve\\build\\objs\\frcUserProgram\
 C:\\Users\\Rogue\\Documents\\Roomba\\Roomba-Swerve\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\d0px5eij51rpczc4xgv8dwyn4\\LimelightPose.o
 C:\\Users\\Rogue\\Documents\\Roomba\\Roomba-Swerve\\build\\objs\\frcUserProgram\\release\\frcUserProgramCpp\\wmuo9jvpbh3mtqxdbh6s6yll\\SwerveModuleSubsystem.o
 C:\\Users\\Rogue\\.gradle\\caches\\transforms-3\\e00cefe776f70ca2c876e5c19204ae68\\transformed\\wpilibNewCommands-cpp-2023.1.1-linuxathena\\linux\\athena\\shared\\libwpilibNewCommands.so
+C:\\Users\\Rogue\\.gradle\\caches\\transforms-3\\a4bbeb955e5a45528ec2b2c71ff8f8f2\\transformed\\PathplannerLib-cpp-2024.1.2-linuxathenastatic\\linux\\athena\\static\\libPathplannerLib.a
 C:\\Users\\Rogue\\.gradle\\caches\\transforms-3\\4d4969e5497f79824b2605740867366f\\transformed\\REVLib-cpp-2023.1.3-linuxathenastatic\\linux\\athena\\static\\libREVLib.a
 C:\\Users\\Rogue\\.gradle\\caches\\transforms-3\\32047c2660ad810336718edc8c0442e5\\transformed\\REVLib-driver-2023.1.3-linuxathenastatic\\linux\\athena\\static\\libREVLibDriver.a
 C:\\Users\\Rogue\\.gradle\\caches\\transforms-3\\cbacf21b099f2c5b23015bc4eaa92bc4\\transformed\\wpiapi-cpp-5.30.4-linuxathena\\linux\\athena\\shared\\libCTRE_Phoenix_WPI.so

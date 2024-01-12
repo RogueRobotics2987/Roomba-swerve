@@ -19,6 +19,8 @@ C:\\Users\\Rogue\\Documents\\Roomba\\Roomba-Swerve\\src\\main\\include
 -I
 C:\\Users\\Rogue\\.gradle\\caches\\transforms-3\\e057fa417edcba90bca777aa11c60edb\\transformed\\wpilibNewCommands-cpp-2023.1.1-headers
 -I
+C:\\Users\\Rogue\\.gradle\\caches\\transforms-3\\c60c65f77bd204d108568ecf35fccb4c\\transformed\\PathplannerLib-cpp-2024.1.2-headers
+-I
 C:\\Users\\Rogue\\.gradle\\caches\\transforms-3\\273d4474b067daac7c3eb0e4c145b821\\transformed\\REVLib-cpp-2023.1.3-headers
 -I
 C:\\Users\\Rogue\\.gradle\\caches\\transforms-3\\a10ae3960e939ef27083226a6b434298\\transformed\\REVLib-driver-2023.1.3-headers

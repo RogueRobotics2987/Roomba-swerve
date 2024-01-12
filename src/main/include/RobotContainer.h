@@ -12,9 +12,12 @@
 #include <frc2/command/InstantCommand.h>
 #include <frc2/command/RunCommand.h>
 #include <frc2/command/SequentialCommandGroup.h>
+#include <frc2/command/SwerveControllerCommand.h>
 #include <iostream>
 #include "subsystems/LimelightPose.h"
 #include "commands/LimeLightCmd.h"
+#include <frc/trajectory/Trajectory.h>
+#include <frc/trajectory/TrajectoryGenerator.h>
 
 
 /**
@@ -28,7 +31,7 @@ class RobotContainer {
  public:
   RobotContainer();
   frc2::Command* GetAutonomousCommand();
-
+  
 
   float Deadzone(float x);
 
@@ -42,6 +45,9 @@ class RobotContainer {
   DriveSubsystem m_drive;
   LimelightPose m_limePose;
 
+frc2::Command* GenerateTrajectory();
+
 
   void ConfigureButtonBindings();
 };
+

@@ -7,8 +7,8 @@ compiling LimelightPose.cpp successful.
 
 compiling RobotContainer.cpp successful.
 
-compiling SwerveModuleSubsystem.cpp successful.
-
 compiling DriveSubsystem.cpp successful.
+
+compiling SwerveModuleSubsystem.cpp successful.
 
 Finished compileFrcUserProgramReleaseExecutableFrcUserProgramCpp, see full log file:///C:/Users/Rogue/Documents/Roomba/Roomba-Swerve/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt.

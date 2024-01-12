@@ -81,3 +81,45 @@ float RobotContainer::Deadzone(float x){
 frc2::Command* RobotContainer::GetAutonomousCommand() {
   return NULL;
 }
+
+frc2::Command* RobotContainer::GenerateTrajectory(){
+  // 2018 cross scale auto waypoints
+  const frc::Pose2d startSpot{0_m, 0_m, frc::Rotation2d(180_deg)};
+  const frc::Pose2d endSpot{0_m, 2_m, frc::Rotation2d(180_deg)};
+
+  std::vector<frc::Translation2d> interiorWaypoints{
+      frc::Translation2d{0_m, 1_m}};
+
+  frc::TrajectoryConfig config{12_fps, 12_fps_sq};
+  config.SetReversed(true);
+
+  auto trajectory = frc::TrajectoryGenerator::GenerateTrajectory(
+      startSpot, interiorWaypoints, endSpot, config);
+  frc::ProfiledPIDController<units::radians> thetaController{
+      AutoConstants::kPThetaController, 0, 0,
+      AutoConstants::kThetaControllerConstraints};
+
+  thetaController.EnableContinuousInput(units::radian_t{-std::numbers::pi},
+                                        units::radian_t{std::numbers::pi});
+
+  frc2::SwerveControllerCommand<4> swerveControllerCommand(
+      trajectory, [this]() { return m_drive.GetPose(); },
+
+      m_drive.kDriveKinematics,
+
+      frc2::PIDController{AutoConstants::kPXController, 0, 0},
+      frc2::PIDController{AutoConstants::kPYController, 0, 0}, thetaController,
+
+      [this](auto moduleStates) { m_drive.SetModuleStates(moduleStates); },
+
+      {&m_drive});
+
+  // Reset odometry to the starting pose of the trajectory.
+  m_drive.ResetOdometry(trajectory.InitialPose());
+
+  // no auto
+  return new frc2::SequentialCommandGroup(
+      std::move(swerveControllerCommand),
+      frc2::InstantCommand(
+          [this]() { m_drive.Drive(0_mps, 0_mps, 0_rad_per_s, false, false); }, {}));
+}

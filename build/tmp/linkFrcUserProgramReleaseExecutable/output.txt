@@ -1,4 +1,7 @@
 See file:///C:/Users/Rogue/Documents/Roomba/Roomba-Swerve/build/tmp/linkFrcUserProgramReleaseExecutable/output.txt for all output for linkFrcUserProgramReleaseExecutable.
-linking frcUserProgram successful.
+linking frcUserProgram failed.
+c:/users/public/wpilib/2023/roborio/bin/../arm-nilrt-linux-gnueabi/sysroot/usr/lib/gcc/arm-nilrt-linux-gnueabi/12/../../../../../../../arm-nilrt-linux-gnueabi/bin/ld.exe: C:\Users\Rogue\Documents\Roomba\Roomba-Swerve\build\objs\frcUserProgram\release\frcUserProgramCpp\45vqxio4pi9nbs4dcvmcpqo1r\RobotContainer.o: in function `RobotContainer::GenerateTrajectory()':
+RobotContainer.cpp:(.text+0x11d4): undefined reference to `AutoConstants::kThetaControllerConstraints'
+collect2.exe: error: ld returned 1 exit status
 
 Finished linkFrcUserProgramReleaseExecutable, see full log file:///C:/Users/Rogue/Documents/Roomba/Roomba-Swerve/build/tmp/linkFrcUserProgramReleaseExecutable/output.txt.
