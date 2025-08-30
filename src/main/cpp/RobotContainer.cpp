@@ -1,79 +1,48 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
 #include "RobotContainer.h"
 
+#include <frc2/command/Commands.h>
 
-using namespace DriveConstants;
-
-
-RobotContainer::RobotContainer() {
-  // Initialize all of your commands and subsystems here
-      std::cout << "cout in robot container" << std::endl;
-
-
-  // Configure the button bindings
-  ConfigureButtonBindings();
-  m_drive.ZeroHeading(); //resets the heading on the gyro
-
-
-m_drive.SetDefaultCommand(frc2::RunCommand(
-      [this] {
-      bool noJoystickInput = false; //checks if there is any joystick input (if true the wheels will go to the the 45 degree (X) position)
-      double safeX = Deadzone(m_driverController.GetLeftX());
-      double safeY =  Deadzone(m_driverController.GetLeftY());
-      double safeRot = Deadzone(m_driverController.GetRightX());
-
-
-      bool fieldOrientated;
-      if (m_driverController.GetRawAxis(3)> 0.15){ //if the right trigger is pulled
-        fieldOrientated = false; //robot orientated driving
-      }
-      if (m_driverController.GetRawAxis(3)< 0.15){ //if the right trigger is not pulled
-        fieldOrientated = true; //field orientated driving
-      }
-
-
-      if ((safeX == 0) && (safeY == 0) && (safeRot == 0)) {
-        noJoystickInput = true; //the wheels will move to the 45 degree (X) position
-      }
-
-
-      m_drive.Drive(units::meters_per_second_t(
-                    -safeY * AutoConstants::kMaxSpeed),
-                    units::meters_per_second_t(
-                    -safeX * AutoConstants::kMaxSpeed),
-                    units::radians_per_second_t(
-                    -safeRot * std::numbers::pi * 1.5),
-                    fieldOrientated,
-                    noJoystickInput);
-      },{&m_drive}));
+RobotContainer::RobotContainer()
+{
+    ConfigureBindings();
 }
 
+void RobotContainer::ConfigureBindings()
+{
+    // Note that X is defined as forward according to WPILib convention,
+    // and Y is defined as to the left according to WPILib convention.
+    drivetrain.SetDefaultCommand(
+        // Drivetrain will execute this command periodically
+        drivetrain.ApplyRequest([this]() -> auto&& {
+            return drive.WithVelocityX(-joystick.GetLeftY() * MaxSpeed) // Drive forward with negative Y (forward)
+                .WithVelocityY(-joystick.GetLeftX() * MaxSpeed) // Drive left with negative X (left)
+                .WithRotationalRate(-joystick.GetRightX() * MaxAngularRate); // Drive counterclockwise with negative X (left)
+        })
+    );
 
-void RobotContainer::ConfigureButtonBindings() {
-  //Resets the heading of the gyro. In other words, it resets which way the robot thinks is the front
-  frc2::JoystickButton(&m_driverController, 5).OnTrue(m_drive.ZeroHeading());
+    joystick.A().WhileTrue(drivetrain.ApplyRequest([this]() -> auto&& { return brake; }));
+    joystick.B().WhileTrue(drivetrain.ApplyRequest([this]() -> auto&& {
+        return point.WithModuleDirection(frc::Rotation2d{-joystick.GetLeftY(), -joystick.GetLeftX()});
+    }));
 
+    // Run SysId routines when holding back/start and X/Y.
+    // Note that each routine should be run exactly once in a single log.
+    (joystick.Back() && joystick.Y()).WhileTrue(drivetrain.SysIdDynamic(frc2::sysid::Direction::kForward));
+    (joystick.Back() && joystick.X()).WhileTrue(drivetrain.SysIdDynamic(frc2::sysid::Direction::kReverse));
+    (joystick.Start() && joystick.Y()).WhileTrue(drivetrain.SysIdQuasistatic(frc2::sysid::Direction::kForward));
+    (joystick.Start() && joystick.X()).WhileTrue(drivetrain.SysIdQuasistatic(frc2::sysid::Direction::kReverse));
 
-  //Robot slides right (when front is away from the drivers)
-  frc2::JoystickButton(&m_driverController, 1).WhileTrue(m_drive.Twitch(true));
+    // reset the field-centric heading on left bumper press
+    joystick.LeftBumper().OnTrue(drivetrain.RunOnce([this] { drivetrain.SeedFieldCentric(); }));
 
-
-  //Robot slides left (when front is away from the drivers)
-  frc2::JoystickButton(&m_driverController, 2).WhileTrue(m_drive.Twitch(false));
+    drivetrain.RegisterTelemetry([this](auto const &state) { logger.Telemeterize(state); });
 }
 
-
-float RobotContainer::Deadzone(float x){
-  if ((x < 0.1) &&  (x > -0.1)){
-    x=0;
-  } else if (x >= 0.1){
-    x = x - 0.1;
-  } else if (x <= -0.1){
-    x = x + 0.1;
-  }
-  return(x);
-}
-
-
-frc2::Command* RobotContainer::GetAutonomousCommand() {
-  return NULL;
+frc2::CommandPtr RobotContainer::GetAutonomousCommand()
+{
+    return frc2::cmd::Print("No autonomous command configured");
 }
